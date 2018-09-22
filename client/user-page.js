@@ -6,13 +6,14 @@ const UserPage = props => {
   const { handleClick } = props;
   const user = props.user;
 
-  user.id ?
-
+  if (!user.id) {
+    return <Redirect to="/" />;
+  }
   return (
     <div className="h100 w100 flex column align-items-center justify-center">
       <div className="flex">
         <img className="rounded mr1" src={user.imageUrl} />
-        <h1>Welcome back! {user.name}</h1>
+        <h1>Welcome back {user.email}!</h1>
       </div>
       <div>
         <button className="btn bg-red white p1 rounded" onClick={handleClick}>
@@ -21,13 +22,11 @@ const UserPage = props => {
       </div>
     </div>
   );
-
-  :
 };
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    user: state.user
+    user: state.user,
     // your code here
   };
 };
